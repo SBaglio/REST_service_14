@@ -1,7 +1,5 @@
 package gym_in_tech.rest_service_14;
 
-
-import com.sun.tools.javac.Main;
 import gym_in_tech.rest_service_14.pojos.Esercizio;
 import gym_in_tech.rest_service_14.pojos.Programma;
 import org.springframework.beans.factory.annotation.Autowired;
