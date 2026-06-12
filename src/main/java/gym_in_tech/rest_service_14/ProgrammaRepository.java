@@ -21,14 +21,13 @@ public class ProgrammaRepository{
 
     // Endpoint 1: lista nomi programmi predefiniti
     public List<Programma> findAllPrograms() {
-        String sql = "SELECT nome FROM PROGRAMMI_REST";
+        String sql = "SELECT id, nome, kcal FROM PROGRAMMI_REST";
 
         RowMapper<Programma> programmaRowMapper = (r, i) -> {
             Programma rowObject = new Programma();
             rowObject.setId(r.getInt("ID"));
             rowObject.setNomeProg(r.getString("NOME"));
             rowObject.setEsercizi(getComposizione(rowObject.getNomeProg()));
-            rowObject.setTipo("predefinito");
             rowObject.setKcal(r.getInt("KCAL"));
 
             return rowObject;
@@ -59,31 +58,6 @@ public class ProgrammaRepository{
         String sql = "SELECT kcal FROM ESERCIZI WHERE nomeEs = ?";
         return jdbc.queryForObject(sql, Float.class, nomeEs);
     }
-
-//    // Inserimento programma personalizzato
-//    @Transactional
-//    public long inserisciProgrammaPersonalizzato(String nomeEs, int numSerie,
-//                                                 int numRep, float kcal) {
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        jdbc.update(connection -> {
-//            PreparedStatement ps = connection.prepareStatement(
-//                    "INSERT INTO PROGRAMMI_PERSONALIZZATI (nomeEs, numSerie, numRep, kcal, numAllenamenti) " +
-//                            "VALUES (?, ?, ?, ?, 0)",
-//                    Statement.RETURN_GENERATED_KEYS);
-//            ps.setString(1, nomeEs);
-//            ps.setInt(2, numSerie);
-//            ps.setInt(3, numRep);
-//            ps.setFloat(4, kcal);
-//            return ps;
-//        }, keyHolder);
-//        return keyHolder.getKey().longValue();
-//    }
-//
-//    public void collegaProgrammaUtente(String username, long idProg) {
-//        jdbc.update(
-//                "INSERT INTO USER_PRO_PROGRAMMI (username, idProg) VALUES (?, ?)",
-//                username, idProg);
-//    }
 
 
 }

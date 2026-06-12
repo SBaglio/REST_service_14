@@ -3,18 +3,15 @@ package gym_in_tech.rest_service_14;
 import gym_in_tech.rest_service_14.pojos.Esercizio;
 import gym_in_tech.rest_service_14.pojos.Programma;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class MainController {
 
-    private ProgrammaRepository programmaRepository;
-    private KCalCalculatorService calculatorService;
+    private final ProgrammaRepository programmaRepository;
+    private final KCalCalculatorService calculatorService;
 
     @Autowired
     MainController(ProgrammaRepository programmaRepository, KCalCalculatorService calculatorService){
@@ -33,7 +30,7 @@ public class MainController {
     }
 
     @PostMapping("/countKcal")
-    public float countKCal(@RequestParam Programma programma){
+    public float countKCal(@RequestBody Programma programma){
         return calculatorService.countKCal(programma);
     }
 

@@ -10,20 +10,17 @@ public class Programma {
     private List<Esercizio> esercizi;
     private int numAllenamenti;
     private float kcal;
-    private String tipo;
 
     public Programma() {
         this.nomeProg = "";
         this.numAllenamenti=0;
-        this.tipo="";
         this.kcal=0;
         this.esercizi = new ArrayList<>();
     }
 
-    public Programma(String nomeProg, List<Esercizio> esercizi, String tipo){
+    public Programma(String nomeProg, List<Esercizio> esercizi){
         this.nomeProg = nomeProg;
         this.numAllenamenti=0;
-        this.tipo=tipo;
         this.esercizi = esercizi;
         this.kcal=this.getTotaleKcal();
     }
@@ -64,6 +61,4 @@ public class Programma {
     public int getNumAllenamenti() { return numAllenamenti; }
     public void setNumAllenamenti(int numAllenamenti) { this.numAllenamenti = numAllenamenti; }
 
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
 }
