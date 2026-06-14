@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class KCalCalculatorService {
 
+    //Calcolo per contare le calorie associate a un programma
     public float countKCal(Programma programma){
         List<Esercizio> esercizi = programma.getEsercizi();
         float kcalProg=0;

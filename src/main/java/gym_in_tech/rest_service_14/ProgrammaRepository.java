@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ProgrammaRepository{
         this.jdbc = jdbc;
     }
 
-    // Endpoint 1: lista nomi programmi predefiniti
+    //Lista dei programmi predefiniti
     public List<Programma> findAllPrograms() {
         String sql = "SELECT id, nome, kcal FROM PROGRAMMI_REST";
 
@@ -35,7 +34,7 @@ public class ProgrammaRepository{
         return jdbc.query(sql, programmaRowMapper);
     }
 
-    // Endpoint 2: composizione di un programma (esercizi)
+    //Composizione (esercizi) dato un programma
     public List<Esercizio> getComposizione(String nomeProgramma) {
         String sql = """
             SELECT e.nomeEs, e.numSerie, e.numRep, e.kcal
@@ -51,12 +50,6 @@ public class ProgrammaRepository{
             e.setKcal(r.getFloat("KCAL"));
             return e;
         }, nomeProgramma);
-    }
-
-    // Endpoint 3: kcal di un esercizio dato il nome
-    public float getKcalByEsercizio(String nomeEs) {
-        String sql = "SELECT kcal FROM ESERCIZI WHERE nomeEs = ?";
-        return jdbc.queryForObject(sql, Float.class, nomeEs);
     }
 
 
